@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Make Payment</h2>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Appointment ID:</strong> {{ appointment.id }}</p>
+            <p><strong>Doctor:</strong> {{ appointment.doctor.user.username }}</p>
+            <p><strong>Fee:</strong> ${{ appointment.fee }}</p>
+
+            <!-- Payment Form -->
+            <form id="payment-form">
+                {% csrf_token %}
+                <div class="mb-3" id="card-element">
+                    <!-- Stripe Elements will insert the card input field here -->
+                </div>
+                <div id="card-errors" class="text-danger mb-3"></div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Pay Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    // Initialize Stripe
+    const stripe = Stripe("{{ stripe_public_key }}"); // Pass the public key from the backend
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    cardElement.mount("#card-element");
+
+    // Form submission
+    const form = document.getElementById("payment-form");
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: cardElement
+        });
+
+        if (error) {
+            document.getElementById("card-errors").textContent = error.message;
+        } else {
+            // Send the payment method ID to the server
+            const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+            fetch("{% url 'process_payment' appointment.id %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken
+                },
+                body: JSON.stringify({ payment_method_id: paymentMethod.id })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Payment successful!");
+                    window.location.href = "{% url 'payment_success' %}";
+                } else {
+                    document.getElementById("card-errors").textContent = data.error;
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

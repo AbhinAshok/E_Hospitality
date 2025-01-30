@@ -1,0 +1,7 @@
+<h1>Confirm Delete Specialization</h1>
+<p>Are you sure you want to delete the specialization "{{ specialization.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'manage_specializations' %}">Cancel</a>
+</form>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Health Education Resources</h1>
+
+    <!-- Resources List -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h2 class="h5 mb-0">Available Resources</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for resource in resources %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><strong>{{ resource.title }}</strong></span>
+                        <a href="{{ resource.link }}" class="btn btn-primary btn-sm" target="_blank">Learn More</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Add Resource Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'resource_create' %}" class="btn btn-success btn-lg">Add Resource</a>
+    </div>
+</div>
+{% endblock %}

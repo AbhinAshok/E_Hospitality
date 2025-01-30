@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="dashboard-container">
+        <h2 class="text-center mb-3">👨‍⚕️ Patient Dashboard</h2>
+        <p class="text-center">Welcome to your dashboard. Here you can manage your profile, book appointments, and access healthcare services.</p>
+
+        <div class="row mt-4">
+            <!-- Register Patient -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📝 Register</h5>
+                        <p class="card-text">Register as a patient and update your details.</p>
+                        <a href="{% url 'register_patient' %}" class="btn btn-primary">Register Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointment Booking -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📅 Book Appointment</h5>
+                        <p class="card-text">Schedule an appointment with a doctor.</p>
+                        <a href="{% url 'appointment_create' %}" class="btn btn-success">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Prescriptions -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">💊 View Prescriptions</h5>
+                        <p class="card-text">Check your prescribed medications.</p>
+                        <a href="{% url 'patient_prescriptions' request.user.id %}" class="btn btn-danger">View Prescriptions</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medical History -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📜 Medical History</h5>
+                        <p class="card-text">Access your past medical records.</p>
+                        <a href="{% url 'patient_medical_history' request.user.id %}" class="btn btn-warning">View History</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">⬅️ Back to Home</h5>
+                        <p class="card-text">Return to the main dashboard.</p>
+                        <a href="{% url 'base' %}" class="btn btn-secondary">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

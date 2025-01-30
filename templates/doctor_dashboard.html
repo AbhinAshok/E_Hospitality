@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="dashboard-container">
+        <h2 class="text-center mb-3">👨‍⚕️ Doctor Dashboard</h2>
+        <p class="text-center">Welcome to your dashboard. Manage patient records, appointments, and view details.</p>
+
+        <div class="row mt-4">
+            <!-- Register as Doctor -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📝 Register</h5>
+                        <p class="card-text">Complete your profile and register.</p>
+                        <a href="{% url 'register_doctor' %}" class="btn btn-success">Register Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Appointments -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">📅 View Appointments</h5>
+                        <p class="card-text">Check and manage your patient appointments.</p>
+                        <a href="{% url 'appointment_list' %}" class="btn btn-secondary">View Appointments</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manage Patients -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">🏥 Manage Patients</h5>
+                        <p class="card-text">Access and update patient records.</p>
+                        <a href="{% url 'patient_list' %}" class="btn btn-primary">Manage Patients</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card option-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">⬅️ Back to Home</h5>
+                        <p class="card-text">Return to the main dashboard.</p>
+                        <a href="{% url 'base' %}" class="btn btn-warning">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

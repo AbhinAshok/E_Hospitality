@@ -1,0 +1,38 @@
+{% extends 'base.html' %}  <!-- Assuming you have a base template -->
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Registered Patients</h2>
+    
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.username }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.phone_number }}</td> <!-- Assuming phone_number exists in your model -->
+                <td>
+                    <a href="{% url 'admin_patient_detail' patient.id %}" class="btn btn-info btn-sm">
+                        View Details
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No registered patients found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

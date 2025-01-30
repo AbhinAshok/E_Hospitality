@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Medical History</h2>
+
+        <!-- Patient Information -->
+        <div class="alert alert-info">
+            <h5>Patient: {{ patient.username }}</h5>
+            <p><strong>Email:</strong> {{ patient.email }}</p>
+        </div>
+
+        <!-- Medical Records Section -->
+        {% if medical_records %}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Diagnosis</th>
+                            <th>Treatment Plan</th>
+                            <th>Medications</th>
+                            <th>Allergies</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in medical_records %}
+                        <tr>
+                            <td>{{ record.diagnosis }}</td>
+                            <td>{{ record.treatment_plan }}</td>
+                            <td>{{ record.medications|default:"N/A" }}</td>
+                            <td>{{ record.allergies|default:"N/A" }}</td>
+                            <td>{{ record.created_at|date:"M d, Y" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted">No medical records found.</p>
+        {% endif %}
+
+        <!-- Back Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'patient_dashboard' %}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

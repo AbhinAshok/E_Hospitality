@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Prescriptions</h2>
+
+        <!-- Patient Information -->
+        <div class="alert alert-info">
+            <h5>Patient: {{ patient.username }}</h5>
+            <p><strong>Email:</strong> {{ patient.email }}</p>
+        </div>
+
+        <!-- Prescriptions Section -->
+        {% if prescriptions %}
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Medication Name</th>
+                            <th>Dosage Instructions</th>
+                            <th>Additional Medicines</th>
+                            <th>Prescribed By</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prescription in prescriptions %}
+                        <tr>
+                            <td>{{ prescription.medication_name }}</td>
+                            <td>{{ prescription.dosage_instructions }}</td>
+                            <td>{{ prescription.medicines|default:"N/A" }}</td>
+                            <td>Dr. {{ prescription.doctor.user.username }}</td>
+                            <td>{{ prescription.created_at|date:"M d, Y" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted">No prescriptions found.</p>
+        {% endif %}
+
+        <!-- Back Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'patient_dashboard' %}" class="btn btn-secondary">Back</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

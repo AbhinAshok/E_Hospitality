@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Doctor Profile</title>
+</head>
+<body>
+    <h1>Welcome, Dr. {{ object.user.username }}</h1>
+    <p>Specialty: {{ object.specialty }}</p>
+    <p>Phone: {{ object.phone }}</p>
+    <a href="{% url 'appointment_list' %}">View Appointments</a>
+</body>
+</html>

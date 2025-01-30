@@ -1,0 +1,7 @@
+<h1>Confirm Remove Doctor</h1>
+<p>Are you sure you want to remove Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Remove</button>
+    <a href="{% url 'admin_dashboard' %}">Cancel</a>
+</form>

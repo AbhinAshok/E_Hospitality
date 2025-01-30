@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - E-Hospitality</title>
+
+    <!-- Bootstrap & Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?hospital,medical') no-repeat center center/cover;
+            color: #fff;
+        }
+
+        .navbar {
+            background: rgba(0, 123, 255, 0.9);
+        }
+
+        .nav-link {
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f8f9fa;
+            text-decoration: underline;
+        }
+
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        .sidebar {
+            background: rgba(0, 123, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+        }
+
+        .list-group-item {
+            background: transparent;
+            border: none;
+            font-weight: bold;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .section-header {
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card {
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">E-Hospitality Admin Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light text-dark px-3" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mt-4">
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <h5 class="text-center">Admin Menu</h5>
+                    <div class="list-group">
+                        <a href="#user-management" class="list-group-item list-group-item-action">User Management</a>
+                        <a href="#facility-management" class="list-group-item list-group-item-action">Facility Management</a>
+                        <a href="#appointment-management" class="list-group-item list-group-item-action">Appointment Management</a>
+                        <a href="#billing" class="list-group-item list-group-item-action">Billing</a>
+                        <a href="#health-resources" class="list-group-item list-group-item-action">Health Resources</a>
+                        <a href="#doctor-management" class="list-group-item list-group-item-action">Doctor Management</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="dashboard-container">
+                    <!-- User Management Section -->
+                    <section id="user-management">
+                        <h2 class="section-header">User Management</h2>
+                        <p>Manage user accounts, roles, and permissions.</p>
+                        <a href="{% url 'user_list' %}" class="btn btn-primary">View All Users</a>
+                    </section>
+
+                    <!-- Facility Management Section -->
+                    <section id="facility-management">
+                        <h2 class="section-header">Facility Management</h2>
+                        <p>Manage healthcare facilities, departments, and resources.</p>
+                        <a href="{% url 'facility_list' %}" class="btn btn-primary">Manage Facilities</a>
+                    </section>
+
+                    <!-- Appointment Management Section -->
+                    <section id="appointment-management">
+                        <h2 class="section-header">Appointment Management</h2>
+                        <p>View and manage all appointments.</p>
+                        <a href="{% url 'admin_appointment_list' %}" class="btn btn-primary">Manage Appointments</a>
+                    </section>
+
+                    <!-- Billing Section -->
+                    <section id="billing">
+                        <h2 class="section-header">Billing</h2>
+                        <p>View and manage patient billing and payments.</p>
+                        <a href="{% url 'billing_list' %}" class="btn btn-primary">Manage Billing</a>
+                    </section>
+
+                    <!-- Health Education Resources -->
+                    <section id="health-resources">
+                        <h2 class="section-header">Health Education Resources</h2>
+                        <p>Manage educational resources for patients and staff.</p>
+                        <a href="{% url 'resource_list' %}" class="btn btn-primary">Manage Resources</a>
+                    </section>
+
+                    <!-- Doctor Management Section -->
+                    <section id="doctor-management">
+                        <h2 class="section-header">Doctor Management</h2>
+                        <p>Add and manage doctors available for appointment bookings.</p>
+                        <div class="card">
+                            <div class="card-header">
+                                Add a Doctor
+                            </div>
+                            <div class="card-body">
+                                <form action="{% url 'add_doctor' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="doctor-name" class="form-label">Doctor Name</label>
+                                        <input type="text" class="form-control" id="doctor-name" name="name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="doctor-specialty" class="form-label">Specialty</label>
+                                        <input type="text" class="form-control" id="doctor-specialty" name="specialty"
+                                            required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Add Doctor</button>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <a href="{% url 'doctors_list' %}" class="btn btn-info">View All Doctors</a>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 E-Hospitality | Designed by Abhin Ashok</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Prescription</title>
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/6hb7X8cxj2aGVu2DXYjMgx9fT6B/nt8E+82oh8"
+        crossorigin="anonymous"
+    />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Create Prescription</h1>
+
+        <!-- Display form errors -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Prescription Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.medication_name.label_tag }}
+                {{ form.medication_name }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.dosage_instructions.label_tag }}
+                {{ form.dosage_instructions }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.medicines.label_tag }}
+                {{ form.medicines }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Prescription</button>
+            <a href="{% url 'doctor_appointment_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76A9W7IwzOJ9D6jG9sI35K1QALpUCW8cLV8OnUH0Jpc24E2j4uBIqJr74Pb1jV"
+        crossorigin="anonymous"
+    ></script>
+</body>
+</html>

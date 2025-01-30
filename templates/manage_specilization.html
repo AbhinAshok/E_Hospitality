@@ -1,0 +1,17 @@
+<h1>Manage Specializations</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="New Specialization" required>
+    <button type="submit">Add Specialization</button>
+</form>
+<ul>
+    {% for specialization in specializations %}
+    <li>
+        {{ specialization.name }}
+        <form method="post" action="{% url 'delete_specialization' specialization.id %}">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Patient Details</h2>
+
+    <div class="card shadow p-4">
+        <h4>{{ patient.username }}</h4>
+        <p><strong>Email:</strong> {{ patient.email }}</p>
+        <p><strong>Phone:</strong> {{ patient.phone_number }}</p>
+        <p><strong>Date Joined:</strong> {{ patient.date_joined }}</p>
+        
+        <a href="{% url 'admin_patient_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+</div>
+{% endblock %}

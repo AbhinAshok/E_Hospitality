@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .content {
+       background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTfLnnOYeUyf2OqpOKfgYbbSZB_T1n_jqqcQ&s');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+    }
+</style>
+
+<div class="container">
+    <div class="content p-4">
+        <h2 class="text-center">Contact Us</h2>
+        <p class="text-center">We'd love to hear from you! Reach out to us via phone or email, or fill out the form below.</p>
+        
+        <div class="contact-info text-center my-4">
+            <p><strong>Phone:</strong> +1 234-567-8901</p>
+            <p><strong>Email:</strong> contact@e-hospitality.com</p>
+        </div>
+
+        <form class="mt-4">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" rows="4" placeholder="Your message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

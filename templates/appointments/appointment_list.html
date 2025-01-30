@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Appointments</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Your Appointments</h2>
+        <a href="{% url 'appointment_create' %}" class="btn btn-primary mb-3">Book New Appointment</a>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ appointment.date }}</td>
+                    <td>{{ appointment.doctor.user.username }}</td>
+                    <td>{{ appointment.status }}</td>
+                    <td>
+                        {% if appointment.status == 'Pending' %}
+                        <form method="post" action="{% url 'confirm_appointment' appointment.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-success btn-sm">Confirm</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No Appointments Found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
