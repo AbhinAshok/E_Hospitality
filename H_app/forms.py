@@ -21,7 +21,7 @@ from .models import (
 
 from django.contrib.auth import get_user_model
 
-# Appointment Form
+
 class AppointmentForm(forms.ModelForm):
     patient_name = forms.CharField(
         max_length=255,
@@ -39,16 +39,15 @@ class AppointmentForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        self.logged_in_user = kwargs.pop('logged_in_user', None)  # Accept logged-in user in constructor
+        self.logged_in_user = kwargs.pop('logged_in_user', None)  
         super().__init__(*args, **kwargs)
         if self.logged_in_user:
             self.fields['logged_in_user_name'] = forms.CharField(
-                initial=self.logged_in_user.get_full_name(),  # Display logged-in user's name
+                initial=self.logged_in_user.get_full_name(),  
                 widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
                 label='Logged-in User'
             )
 
-# Medical Record Form
 class MedicalRecordForm(forms.ModelForm):
     class Meta:
         model = MedicalRecord
@@ -60,7 +59,6 @@ class MedicalRecordForm(forms.ModelForm):
             'allergies': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-# Billing Form
 class BillingForm(forms.ModelForm):
     class Meta:
         model = Billing
@@ -70,7 +68,7 @@ class BillingForm(forms.ModelForm):
         }
 
 
-# payment form
+
 
 class PaymentForm(forms.ModelForm):
     class Meta:
@@ -81,7 +79,7 @@ class PaymentForm(forms.ModelForm):
         }
 
 
-# E-Prescription Form
+
 
 class PrescriptionForm(forms.ModelForm):
     class Meta:
@@ -92,7 +90,7 @@ class PrescriptionForm(forms.ModelForm):
             'dosage_instructions': forms.Textarea(attrs={'class': 'form-control'}),
             'medicines': forms.Textarea(attrs={'class': 'form-control'}),
         }
-# Facility Form
+
 class FacilityForm(forms.ModelForm):
     class Meta:
         model = Facility
@@ -101,7 +99,7 @@ class FacilityForm(forms.ModelForm):
             'resources': forms.Textarea(attrs={'rows': 3}),
         }
 
-# Health Education Resource Form
+
 class HealthEducationResourceForm(forms.ModelForm):
     class Meta:
         model = HealthEducationResource
@@ -119,7 +117,7 @@ class SelectDateForm(forms.Form):
 User = get_user_model()
 
 class DoctorProfileForm(forms.ModelForm):
-    # Fields for user creation
+    
     username = forms.CharField(
         max_length=150,
         required=True,
@@ -163,29 +161,29 @@ class DoctorProfileForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        print(f"Initializing DoctorProfileForm with args: {args}, kwargs: {kwargs}")  # Debug statement
+        print(f"Initializing DoctorProfileForm with args: {args}, kwargs: {kwargs}")  
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
         """
         Save both the user and doctor profile.
         """
-        # Create the user first
+        
         user = User.objects.create_user(
             username=self.cleaned_data['username'],
-            password=self.cleaned_data['password'],  # Automatically hashed
+            password=self.cleaned_data['password'],  
             email=self.cleaned_data['email'],
         )
 
-        # Create the doctor profile
+        
         doctor_profile = super().save(commit=False)
-        doctor_profile.user = user  # Associate the user with the doctor profile
+        doctor_profile.user = user  
         if commit:
             doctor_profile.save()
         return doctor_profile
 
 
-# patient profile
+
 
 
 class PatientProfileForm(forms.ModelForm):
