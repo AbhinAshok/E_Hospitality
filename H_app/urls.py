@@ -104,12 +104,11 @@ urlpatterns = [
 
     # payment
 
-    path('make_payment/<int:appointment_id>/', views.make_payment, name='make_payment'),
-    path('paymentprocess/<int:appointment_id>/',views.process_payment, name='process_payment'),
-    path("payment/success/", views.payment_success, name="payment_success"),
+    # path('make_payment/<int:appointment_id>/', views.make_payment, name='make_payment'),
+    # path('paymentprocess/<int:appointment_id>/',views.process_payment, name='process_payment'),
+    # path("payment/success/", views.payment_success, name="payment_success"),
 
-    # AJAX example
-    path('appointments/<int:pk>/status/', check_appointment_status, name='check_appointment_status'),
+   
 ]
 
 
