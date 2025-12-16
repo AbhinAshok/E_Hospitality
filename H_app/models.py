@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from E_Hospitality import settings
 
-# Custom User Model
+
 class CustomUser(AbstractUser):
     USER_TYPES = (
         ('patient', 'Patient'),
@@ -14,8 +14,6 @@ class CustomUser(AbstractUser):
 
 
 
-
-# Patient Profile
 
 class PatientProfile(models.Model):
     user = models.OneToOneField(
@@ -33,7 +31,6 @@ class PatientProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-# Doctor Profile
 
 User = get_user_model()
 class DoctorProfile(models.Model):
@@ -42,7 +39,7 @@ class DoctorProfile(models.Model):
     email = models.EmailField(null=True)
     phone_no = models.IntegerField(null=True)
     specialization = models.CharField(max_length=100, null=True)
-    availability = models.CharField(max_length=100, null=True)  # Example: 'Mon-Fri, 9 AM - 5 PM'
+    availability = models.CharField(max_length=100, null=True) 
     phone = models.CharField(max_length=15, null=True)
 
     def __str__(self):
@@ -54,7 +51,7 @@ class Specialization(models.Model):
 
     def __str__(self):
         return self.name
-# Appointment Model
+
 
 class Appointment(models.Model):
     STATUS_CHOICES = [
@@ -84,7 +81,7 @@ class Appointment(models.Model):
     def __str__(self):
         return f"Appointment with Dr. {self.doctor.user.username} on {self.date} at {self.time}"
 
-# Medical Record Model
+
 class MedicalRecord(models.Model):
     patient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -106,7 +103,6 @@ class MedicalRecord(models.Model):
     def __str__(self):
         return f"Medical Record for {self.patient.username} by Dr. {self.doctor.user.username}"
 
-# Prescription Model
 class Prescription(models.Model):
     patient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -126,7 +122,7 @@ class Prescription(models.Model):
     def __str__(self):
         return f"Prescription for {self.patient.username} by Dr. {self.doctor.user.username}"
 
-# Billing Model
+
 class Billing(models.Model):
     patient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -145,7 +141,6 @@ class Billing(models.Model):
     def __str__(self):
         return f"Billing for {self.patient.username}: {self.total_amount} - {self.payment_status}"
 
-# Health Education Resource Model
 class HealthEducationResource(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -154,7 +149,7 @@ class HealthEducationResource(models.Model):
     def __str__(self):
         return self.title
 
-# Facility Model
+
 class Facility(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=200)
@@ -167,7 +162,7 @@ class Facility(models.Model):
     def __str__(self):
         return self.name
 
-# Admin Profile Model
+
 class AdminProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
