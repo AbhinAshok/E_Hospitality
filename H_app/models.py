@@ -41,6 +41,7 @@ class DoctorProfile(models.Model):
     specialization = models.CharField(max_length=100, null=True)
     availability = models.CharField(max_length=100, null=True) 
     phone = models.CharField(max_length=15, null=True)
+    consultation_fee = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"{self.user.username} - {self.specialization}"
@@ -56,9 +57,16 @@ class Specialization(models.Model):
 class Appointment(models.Model):
     STATUS_CHOICES = [
         ('Scheduled', 'Scheduled'),
+        ('Confirmed', 'Confirmed'),
         ('Completed', 'Completed'),
         ('Canceled', 'Canceled'),
     ]
+
+    PAYMENT_STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Paid', 'Paid'),
+    ]
+
 
     patient = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -78,8 +86,13 @@ class Appointment(models.Model):
     is_virtual = models.BooleanField(default=False)
     location = models.CharField(max_length=255, blank=True, null=True)
 
+    fee = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default='Pending')
+
     def __str__(self):
         return f"Appointment with Dr. {self.doctor.user.username} on {self.date} at {self.time}"
+
+    
 
 
 class MedicalRecord(models.Model):
