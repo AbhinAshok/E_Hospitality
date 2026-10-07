@@ -26,25 +26,25 @@ const features = [
     title: "Appointments",
     description: "Schedule and manage doctor visits.",
     icon: CalendarDays,
-    image: "src/images/ehos_doctor1.jpg",
+    image: "/images/ehos_doctor1.jpg",
   },
   {
     title: "Medical records",
     description: "Keep treatment history accessible.",
     icon: Users,
-    image: "src/images/ehos_patientcare.jpg",
+    image: "/images/ehos_patientcare.jpg",
   },
   {
     title: "Prescriptions",
     description: "Review medication instructions securely.",
     icon: FileText,
-    image: "src/images/ehos_service.jpg",
+    image: "/images/ehos_service.jpg",
   },
   {
     title: "Billing",
     description: "Track outstanding and paid bills.",
     icon: CreditCard,
-    image: "src/images/billing.jpg",
+    image: "/images/billing.jpg",
   },
 ];
 
